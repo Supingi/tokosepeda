@@ -1,0 +1,115 @@
+{% extends "produk/base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block smoth_scrolling %}
+	<!-- start-smoth-scrolling -->
+	<script type="text/javascript" src="{% static 'produk/js/move-top.js' %}"></script>
+	<script type="text/javascript" src="{% static 'produk/js/easing.js' %}"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},900);
+			});
+		});
+	</script>
+	<!-- start-smoth-scrolling -->
+{% endblock %}
+
+{% block content %}
+	<!--bike categories-->
+	<div id="cate" class="categories">
+		<div class="container">
+			<h3>CATEGORIES</h3>
+			<div class="categorie-grids">
+				<a href="bicycles.html">
+					<div class="col-md-4 cate-grid grid1">
+						<h4>ROAD BIKE</h4>
+						<p>Untuk Yang Ingin Labih Cepat</p>
+						<a class="store" href="bicycles.html">CARI</a>
+					</div>
+				</a>
+				<a href="bicycles.html">
+					<div class="col-md-4 cate-grid grid2">
+						<h4>MOUNTAIN BIKES</h4>
+						<p>Taklukan Pengunungan</p>
+						<a class="store" href="bicycles.html">CARI</a>
+					</div>
+				</a>
+				<a href="bicycles.html">
+					<div class="col-md-4 cate-grid grid3">
+						<h4>TOURING & CITY BIKE</h4>
+						<p>Kapanpun, Dimanapun</p>
+						<a class="store" href="bicycles.html">CARI</a>
+					</div>
+				</a>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!--/bike categories-->
+
+	<!--recent produk-->
+	<div class="bikes">
+		<h3>POPULAR BRANDS</h3>
+		<div class="bikes-grids">
+			<ul id="flexiselDemo1">
+				{% for b in brand %}
+					<li>
+						<img src="{{ b.logo.url }}" width="175" height="200" alt=""/>
+						<div class="viw">
+							<a href="{% url 'produk:index' %}">{{b.nama}}</a>
+						</div>
+					</li>
+				{% endfor %}	
+			</ul>
+
+			<script type="text/javascript">
+				$(window).load(function() {
+					$("#flexiselDemo1").flexisel({
+						visibleItems: 3,
+						animationSpeed: 1000,
+						autoPlay: true,
+						autoPlaySpeed: 3000,
+						pauseOnHover:true,
+						enableResponsiveBreakpoints: true,
+						responsiveBreakpoints: {
+							portrait: {
+								changePoint:480,
+								visibleItems: 1
+							},
+							landscape: {
+								changePoint:640,
+								visibleItems: 2
+							},
+							tablet: {
+								changePoint:768,
+								visibleItems: 3
+							}
+						}
+					});
+				});
+			</script>
+			<script type="text/javascript" src="{% static 'produk/js/jquery.flexisel.js' %}"></script>
+		</div>
+	</div>
+	<!--/recent produk-->
+
+	<!--contact-->
+	<div class="contact">
+		<div class="container">
+			<h3>CONTACT US</h3>
+			<p>Please contact us for all inquiries and purchase options.</p>
+			<form>
+				<input type="text" placeholder="NAME" required="">
+				<input type="text" placeholder="SURNAME" required="">
+				<input class="user" type="text" placeholder="USER@DOMAIN.COM" required=""><br>
+				<textarea placeholder="MESSAGE"></textarea>
+				<input type="submit" value="SEND">
+			</form>
+		</div>
+	</div>
+	<!--/contact-->
+{% endblock content %}
